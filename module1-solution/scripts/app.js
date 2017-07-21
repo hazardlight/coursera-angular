@@ -45,7 +45,7 @@ function LunchBoxController ($scope) {
 
       for (var i = 0; i<array.length; i++)
       {
-        if ( array[i] != "" ) {
+        if ( array[i] != "" && array[i] != " " ) {
           lunchItemsArrayCleaned.push(array[i]);
         }
       }
