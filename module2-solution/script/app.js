@@ -29,13 +29,17 @@ function ToBuyListController (ListService){
   list1.items = ListService.getItemsDefault();
 
   list1.removeItems = function (itemIndex) { //this is defining the function in the HTML binding list.removeItems()
-    var itemToMove = ListService.removeItemsDefault(itemIndex);
+    // var itemToMove = ListService.removeItemsDefault(itemIndex);
+    // ListService.addItem (itemToMove);
 
     // ListService.addItem (itemToMove.itemName, itemToMove.itemQuantity);
-    ListService.addItem (itemToMove);
 
-    console.log(itemToMove);
-    console.log(itemToMove.quantity);
+    ListService.removeItemsDefault(itemIndex);
+
+    //console.log(itemToMove);
+    //console.log(itemToMove.name);
+
+    //console.log(ListService.getItems());
   };
 }
 
@@ -46,6 +50,9 @@ function AlreadyBoughtListController (ListService){
 
   list2.items = ListService.getItems();
 
+  console.log(ListService.getItems());
+
+
 };
 
 function ListService () {
@@ -55,7 +62,7 @@ function ListService () {
 
   var items = []; //empty array
 
-  var itemsDefault = [{name: "poop", quantity: 3}, {name: "poop", quantity: 3}, {name: "poop", quantity: 3}, {name: "poop", quantity: 3}, {name: "poop", quantity: 3}];
+  var itemsDefault = [{name: "poop1", quantity: 3}, {name: "poop2", quantity: 3}, {name: "poop3", quantity: 3}, {name: "poop4", quantity: 3}, {name: "poop5", quantity: 3}];
 
   // service.addItem = function (itemName, itemQuantity) {
   //   var item = {
@@ -70,13 +77,19 @@ function ListService () {
     items.push(item);
   };
 
+  // service.removeItemsDefault = function (itemIndex){
+  //
+  //   var removed = itemsDefault.splice(itemIndex, 1);
+  //
+  //   return removed;
+  // };
+
   service.removeItemsDefault = function (itemIndex){
 
     var removed = itemsDefault.splice(itemIndex, 1);
 
-    return removed;
+    service.addItem(removed);
   };
-
   // service.removeItems = function () {
   //
   // };
