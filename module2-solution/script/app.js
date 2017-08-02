@@ -1,4 +1,3 @@
-
 (function(){
 
 'use strict'
@@ -32,7 +31,6 @@ function AlreadyBoughtController (ShoppingCartService){
 
   list2.items = ShoppingCartService.getItems();
 
-  //console.log(ShoppingCartService.getItems());
 };
 
 function ShoppingCartService () {
@@ -69,3 +67,6 @@ function ShoppingCartService () {
 
 };
 })();
+
+//minified code works!
+// !function(){"use strict";function e(e){var t=this;t.items=e.getItemsDefault(),console.log("Default items passed to first conroller: ",e.getItemsDefault()),t.removeItems=function(t){e.removeItemsDefault(t),console.log("Removing items from default array: ",e.getItemsDefault()),console.log("Adding items to the purchase list: ",e.getItems())}}function t(e){this.items=e.getItems()}angular.module("ShoppingCartApp",[]).controller("ToBuyController",e).controller("AlreadyBoughtController",t).service("ShoppingCartService",function(){var e=this,t=[],o=[{name:"poop",quantity:3},{name:"poop",quantity:3},{name:"poop",quantity:3},{name:"poop",quantity:3},{name:"poop",quantity:3}];e.addItem=function(e){t.push(e)},e.removeItemsDefault=function(t){var n=o.splice(t,1);console.log("splice value from default array: ",n),console.log("splice value from default array: ",n[0]),e.addItem(n[0])},e.getItemsDefault=function(){return o},e.getItems=function(){return t}}),e.$inject=["ShoppingCartService"],t.$inject=["ShoppingCartService"]}();
