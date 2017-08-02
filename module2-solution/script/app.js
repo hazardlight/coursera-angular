@@ -4,95 +4,60 @@
 'use strict'
 
 angular.module('ShoppingCartApp', [])
-.controller('ToBuyListController', ToBuyListController)
-.controller('AlreadyBoughtListController', AlreadyBoughtListController)
-.service('ListService', ListService);
+.controller('ToBuyController', ToBuyController)
+.controller('AlreadyBoughtController', AlreadyBoughtController)
+.service('ShoppingCartService', ShoppingCartService);
 
-ToBuyListController.$inject = ['ListService'];
-function ToBuyListController (ListService){
+ToBuyController.$inject = ['ShoppingCartService'];
+function ToBuyController (ShoppingCartService){
 
   var list1 = this;
 
-  //var shoppingCart = ListService();
+  list1.items = ShoppingCartService.getItemsDefault();
 
-  // -the ToBuyList needs to start pre-populated with 5 itmes.
-  // -need functinality to add items to the list?
-  // -clicking the "bought" button removes the item and adds it to the AlreadyBought list
-
-  // so, we're just using the controller to instantiate a list? The functionality of the list in implemented in a service?
-
-  // what does this controller do and need in order to function?
-  //
-  // it displays the array of objects that need to be bought. Per the assignment instructions, this array can be hard coded to a variable
-  //
-  // there needs to be a service that can remove items from the array, and push those to list2
-  list1.items = ListService.getItemsDefault();
+  console.log("Default items passed to first conroller: ", ShoppingCartService.getItemsDefault());
 
   list1.removeItems = function (itemIndex) { //this is defining the function in the HTML binding list.removeItems()
-    // var itemToMove = ListService.removeItemsDefault(itemIndex);
-    // ListService.addItem (itemToMove);
 
-    // ListService.addItem (itemToMove.itemName, itemToMove.itemQuantity);
-
-    ListService.removeItemsDefault(itemIndex);
-
-    //console.log(itemToMove);
-    //console.log(itemToMove.name);
-
-    //console.log(ListService.getItems());
+    ShoppingCartService.removeItemsDefault(itemIndex);
+    console.log("Removing items from default array: ", ShoppingCartService.getItemsDefault());
+    console.log("Adding items to the purchase list: ", ShoppingCartService.getItems());
   };
 }
 
-AlreadyBoughtListController.$inject = ['ListService'];
-function AlreadyBoughtListController (ListService){
+AlreadyBoughtController.$inject = ['ShoppingCartService'];
+function AlreadyBoughtController (ShoppingCartService){
 
   var list2 = this;
 
-  list2.items = ListService.getItems();
+  list2.items = ShoppingCartService.getItems();
 
-  console.log(ListService.getItems());
-
-
+  //console.log(ShoppingCartService.getItems());
 };
 
-function ListService () {
+function ShoppingCartService () {
   //this service defines the shopping list and functionality
 
   var service = this;
 
   var items = []; //empty array
 
-  var itemsDefault = [{name: "poop1", quantity: 3}, {name: "poop2", quantity: 3}, {name: "poop3", quantity: 3}, {name: "poop4", quantity: 3}, {name: "poop5", quantity: 3}];
-
-  // service.addItem = function (itemName, itemQuantity) {
-  //   var item = {
-  //     name: itemName,
-  //     quantity: itemQuantity
-  //   };
-  //   items.push(item);
-  // };
+  var itemsDefault = [{name: "poop", quantity: 3}, {name: "poop", quantity: 3}, {name: "poop", quantity: 3}, {name: "poop", quantity: 3}, {name: "poop", quantity: 3}];
+  // var itemsDefault = [1,2,3,4,5];
 
   service.addItem = function (item) {
 
     items.push(item);
   };
 
-  // service.removeItemsDefault = function (itemIndex){
-  //
-  //   var removed = itemsDefault.splice(itemIndex, 1);
-  //
-  //   return removed;
-  // };
-
   service.removeItemsDefault = function (itemIndex){
 
     var removed = itemsDefault.splice(itemIndex, 1);
+    console.log("splice value from default array: ", removed);
+    console.log("splice value from default array: ", removed[0]);
 
-    service.addItem(removed);
+    service.addItem(removed[0]);
   };
-  // service.removeItems = function () {
-  //
-  // };
 
   service.getItemsDefault = function () {
     return itemsDefault;
