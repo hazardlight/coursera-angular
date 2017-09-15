@@ -22,5 +22,43 @@
 // If the user's search term is not found, or the user does not enter anything for the search, the app should display a message "Nothing Found".
 //
 // You can retrieve the items from the server every time the user clicks to search; you do not have to cache the response. Basically, every time the "Narrow it down" button is clicked,
-// all the previous data is whiped, and the process starts over again. Your app does not need to remember what the user chose to remove from the list on the previous search.
+// all the previous data is cleared, and the process starts over again. Your app does not need to remember what the user chose to remove from the list on the previous search.
 //
+
+(function () {
+
+'use strict';
+
+Angular.module('NarrowItDownApp', [])
+.controller('NarrowItDownController', NarrowItDownController)
+.service('NarrowItDownService' NarrowItDownService);
+
+NarrowItDownController.$inject = ['NarrowItDownService'];
+function NarrowItDownController ( NarrowItDownService ) {
+
+  var menu = this;
+  var promise = NarrowItDownService.getMenuCategories();
+
+  promise.then(function(response) {
+    menu.categories = response.data;
+  })
+  .catch(function(error){
+    console.log("holyshiterrors");
+  });
+};
+
+NarrowItDownService.$inject = ['$http']
+function NarrowItDownService ( $http ) {
+
+    var service = this;
+
+    service.getMenuCategories = function () {
+      var response = $http({
+        method: "GET",
+        url: ("blah")
+      });
+      return response;
+    };
+};
+
+})();
