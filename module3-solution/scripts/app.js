@@ -31,33 +31,51 @@
 
 angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
-.service('MenuSearchService', MenuSearchService);
+.service('MenuSearchService', MenuSearchService)
+.directive('foundItems', FoundItems);
 
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController ( MenuSearchService ) {
 
   var menu = this;
-  var promise
-  menu.checkItems;
-  menu.searchTerm;
+  var promise;
+  menu.checkItems = '';
+  menu.searchTerm = '';
+
+  //console.log(menu.searchTerm, "searchTerm Value");
 
   menu.filterTheMenu = function () {
-    promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
-    console.log(promise, "promise");
 
-    promise.then (function (foundItems) {
-      menu.items = foundItems;
+    if (menu.searchTerm === '' || menu.searchTerm === null) {
+      menu.checkItems = "Please enter a search value!";
+    }
+    else {
+      promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
+      //console.log(promise, "promise");
 
-      if (menu.items.length === 0)
-        menu.checkItems = "No Items Found!";
+      promise.then (function (foundItems) {
+        menu.items = foundItems;
+
+        if (menu.items.length === 0 )
+        {
+          menu.checkItems = "No Items Found!";
+        }
         else
-        menu.checkItems = "";
-    })
-    .catch(function(error){
-      console.log(error);
-    });
+          menu.checkItems = "";
+
+          console.log(menu.searchTerm, "searchTerm Value after");
+      })
+      .catch(function(error){
+        console.log(error);
+      });
+    }
   };
 
+  menu.removeItem = function ($index) {
+
+    menu.items.splice($index, 1);
+
+  };
 };
 
 MenuSearchService.$inject = ['$http'];
@@ -72,25 +90,29 @@ function MenuSearchService ( $http ) {
         url: ( "https://davids-restaurant.herokuapp.com/menu_items.json" )
       }).then (function (result) {
 
-        var rawJSON;
+        var rawJSON = result.data.menu_items;;
+        searchTerm = searchTerm.toLowerCase();
         var foundItems = [];
-
         var count = 0;
 
-        rawJSON = result.data.menu_items;
-
         for (var i=0; i<rawJSON.length; i++){
-          if(rawJSON[i].name.includes(searchTerm))
+          if(rawJSON[i].name.toLowerCase().includes(searchTerm))
           {
             foundItems[count] = rawJSON[i];
             count++;
             console.log(foundItems, "foundItems " + count);
           }
-
         }
         return foundItems;
       });
     };
 };
+FoundItems.$inject = [];
+function FoundItems () {
 
+  var ddo = {
+
+  };
+  return ddo;
+}
 })();
