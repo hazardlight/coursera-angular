@@ -29,35 +29,67 @@
 
 'use strict';
 
-Angular.module('NarrowItDownApp', [])
+angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
-.service('NarrowItDownService' NarrowItDownService);
+.service('MenuSearchService', MenuSearchService);
 
-NarrowItDownController.$inject = ['NarrowItDownService'];
-function NarrowItDownController ( NarrowItDownService ) {
+NarrowItDownController.$inject = ['MenuSearchService'];
+function NarrowItDownController ( MenuSearchService ) {
 
   var menu = this;
-  var promise = NarrowItDownService.getMenuCategories();
+  var promise
+  menu.checkItems;
+  menu.searchTerm;
 
-  promise.then(function(response) {
-    menu.categories = response.data;
-  })
-  .catch(function(error){
-    console.log("holyshiterrors");
-  });
+  menu.filterTheMenu = function () {
+    promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
+    console.log(promise, "promise");
+
+    promise.then (function (foundItems) {
+      menu.items = foundItems;
+
+      if (menu.items.length === 0)
+        menu.checkItems = "No Items Found!";
+        else
+        menu.checkItems = "";
+    })
+    .catch(function(error){
+      console.log(error);
+    });
+  };
+
 };
 
-NarrowItDownService.$inject = ['$http']
-function NarrowItDownService ( $http ) {
+MenuSearchService.$inject = ['$http'];
+function MenuSearchService ( $http ) {
 
     var service = this;
 
-    service.getMenuCategories = function () {
-      var response = $http({
+    service.getMatchedMenuItems = function (searchTerm) {
+
+      return $http({
         method: "GET",
-        url: ("blah")
+        url: ( "https://davids-restaurant.herokuapp.com/menu_items.json" )
+      }).then (function (result) {
+
+        var rawJSON;
+        var foundItems = [];
+
+        var count = 0;
+
+        rawJSON = result.data.menu_items;
+
+        for (var i=0; i<rawJSON.length; i++){
+          if(rawJSON[i].name.includes(searchTerm))
+          {
+            foundItems[count] = rawJSON[i];
+            count++;
+            console.log(foundItems, "foundItems " + count);
+          }
+
+        }
+        return foundItems;
       });
-      return response;
     };
 };
 
