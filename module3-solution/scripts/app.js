@@ -34,6 +34,38 @@ angular.module('NarrowItDownApp', [])
 .service('MenuSearchService', MenuSearchService)
 .directive('foundItems', FoundItemsDirective);
 
+//FoundItems.$inject = [];
+function FoundItemsDirective () {
+
+  var ddo = {
+    templateUrl: 'foundItemsList.html',
+        scope: {
+          foundItems: '<',
+          onRemove: '&'
+        },
+        controller: FoundItemsDirectiveController,
+        controllerAs: 'menu',
+        bindToController: true
+  };
+  return ddo;
+}
+
+FoundItemsDirectiveController.$inject = ['MenuSearchService']; //?
+function FoundItemsDirectiveController (MenuSearchService) {
+  var menu = this;
+
+  // list.itemsInList = function () {
+  //   for (var i = 0; i < list.items.length; i++) {
+  //     var name = list.items[i].name;
+  //     if (name.toLowerCase().indexOf("cookie") !== -1) {
+  //       return true;
+  //     }
+  //   }
+  //
+  //   return false;
+  // };
+};
+
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController ( MenuSearchService ) {
 
@@ -71,9 +103,9 @@ function NarrowItDownController ( MenuSearchService ) {
     }
   };
 
-  menu.removeItem = function ($index) {
+  menu.removeItem = function (itemIndex) {
 
-    menu.items.splice($index, 1);
+    menu.items.splice(itemIndex, 1);
 
   };
 };
@@ -107,16 +139,5 @@ function MenuSearchService ( $http ) {
       });
     };
 };
-//FoundItems.$inject = [];
-function FoundItemsDirective () {
 
-  var ddo = {
-
-  };
-  return ddo;
-}
-
-function FoundItemsDirectiveController () {
-  
-};
 })();
