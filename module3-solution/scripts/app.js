@@ -32,7 +32,7 @@
 angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
 .service('MenuSearchService', MenuSearchService)
-.directive('foundItems', FoundItemsDirective);
+.directive('foundItemsDir', FoundItemsDirective);
 
 //FoundItems.$inject = [];
 function FoundItemsDirective () {
@@ -50,9 +50,9 @@ function FoundItemsDirective () {
   return ddo;
 }
 
-FoundItemsDirectiveController.$inject = ['MenuSearchService']; //?
-function FoundItemsDirectiveController (MenuSearchService) {
-  var menu = this;
+//FoundItemsDirectiveController.$inject = ['MenuSearchService']; //?
+function FoundItemsDirectiveController () {
+  //var menu = this;
 
   // list.itemsInList = function () {
   //   for (var i = 0; i < list.items.length; i++) {
@@ -73,6 +73,7 @@ function NarrowItDownController ( MenuSearchService ) {
   var promise;
   menu.checkItems = '';
   menu.searchTerm = '';
+  var found;
 
   //console.log(menu.searchTerm, "searchTerm Value");
 
@@ -87,6 +88,7 @@ function NarrowItDownController ( MenuSearchService ) {
 
       promise.then (function (foundItems) {
         menu.items = foundItems;
+        found = menu.items;
 
         if (menu.items.length === 0 )
         {
@@ -106,8 +108,8 @@ function NarrowItDownController ( MenuSearchService ) {
   menu.removeItem = function (itemIndex) {
 
     menu.items.splice(itemIndex, 1);
-
   };
+  //return found;
 };
 
 MenuSearchService.$inject = ['$http'];
