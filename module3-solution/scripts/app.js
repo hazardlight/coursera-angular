@@ -40,7 +40,9 @@ function FoundItemsDirective () {
   var ddo = {
     templateUrl: 'foundItemsList.html',
         scope: {
-          foundItems: '<',
+          foundItems: '<', //foundItems becomes found-items when you use it in the html, in this case in index.html '<' instructs the directive to have foundItems point to the parent controller instance
+          //when you use found-items in the html, you assign it to the variable in the parent controller scope that the directive will point to. in this case: menu.items
+          //then, when you implement the code in the html templateUrl, menu.items is replaced with the directive's variable/property name, which is menu.foundItems.
           onRemove: '&'
         },
         controller: FoundItemsDirectiveController,
