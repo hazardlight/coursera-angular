@@ -1,6 +1,7 @@
-<div>
+
+<div class="directive-formatting">
 <ul>
-  <li ng-repeat="item in menu.items">
+  <li ng-repeat="item in menu.foundItems">
     {{item.name}}
     <button class="btn btn-primary" ng-click="menu.onRemove({index: $index});">Get this shit OUTTAHERE!</button>
   </li>

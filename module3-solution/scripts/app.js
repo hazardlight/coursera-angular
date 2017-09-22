@@ -50,20 +50,8 @@ function FoundItemsDirective () {
   return ddo;
 }
 
-//FoundItemsDirectiveController.$inject = ['MenuSearchService']; //?
 function FoundItemsDirectiveController () {
-  //var menu = this;
-
-  // list.itemsInList = function () {
-  //   for (var i = 0; i < list.items.length; i++) {
-  //     var name = list.items[i].name;
-  //     if (name.toLowerCase().indexOf("cookie") !== -1) {
-  //       return true;
-  //     }
-  //   }
-  //
-  //   return false;
-  // };
+  //we're not doing anything on the directive's controller instance, just the parent controller. sooo, this is empty.
 };
 
 NarrowItDownController.$inject = ['MenuSearchService'];
@@ -73,23 +61,27 @@ function NarrowItDownController ( MenuSearchService ) {
   var promise;
   menu.checkItems = '';
   menu.searchTerm = '';
-  var found;
+  //var found;
 
   //console.log(menu.searchTerm, "searchTerm Value");
 
   menu.filterTheMenu = function () {
 
+//checks if you're even searching for anything
     if (menu.searchTerm === '' || menu.searchTerm === null) {
       menu.checkItems = "Please enter a search value!";
     }
     else {
+
+      //function filters the JSON array with the searchTerm entered by the user and assigns it o the promis property
       promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
       //console.log(promise, "promise");
 
-      promise.then (function (foundItems) {
+      promise.then (function (foundItems) { //the return value of the function that filters the JSON array is foundItems, which is passed to the .then() function.
         menu.items = foundItems;
-        found = menu.items;
+        //found = menu.items;
 
+//this just checks if any items were found that match the user's searchTerm.
         if (menu.items.length === 0 )
         {
           menu.checkItems = "No Items Found!";
@@ -105,12 +97,19 @@ function NarrowItDownController ( MenuSearchService ) {
     }
   };
 
+//allows the user to selectively remove items they don't want
   menu.removeItem = function (itemIndex) {
 
     menu.items.splice(itemIndex, 1);
   };
   //return found;
 };
+
+
+//MenuSearchService calls the server to get all the JSON data.
+// JSON data is stored in rawJSON
+// the value we're searching for is stored as the searchTerm, which is then normalized as all lowercase letters
+//the array holding the JSON data is then searched for items where the name includes the search term.
 
 MenuSearchService.$inject = ['$http'];
 function MenuSearchService ( $http ) {
@@ -127,7 +126,7 @@ function MenuSearchService ( $http ) {
         var rawJSON = result.data.menu_items;;
         searchTerm = searchTerm.toLowerCase();
         var foundItems = [];
-        var count = 0;
+        var count = 0; //this can also be implemented using .push from rawJSON
 
         for (var i=0; i<rawJSON.length; i++){
           if(rawJSON[i].name.toLowerCase().includes(searchTerm))
