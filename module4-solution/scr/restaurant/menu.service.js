@@ -1,12 +1,12 @@
 (function () {
 'use strict';
 
-angular.module('ShoppingList')
-.service('ShoppingListService', ShoppingListService);
+angular.module('Restaurant')
+.service('MenuService', MenuService);
 
 
-ShoppingListService.$inject = ['$q', '$timeout']
-function ShoppingListService($q, $timeout) {
+MenuService.$inject = ['$q', '$timeout']
+function MenuService($q, $timeout) {
   var service = this;
 
   // List of shopping items

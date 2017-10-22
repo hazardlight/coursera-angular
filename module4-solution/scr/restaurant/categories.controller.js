@@ -5,8 +5,8 @@ angular.module('Restaurant')
 .controller('CategoriesController', CategoriesController);
 
 
-CategoriesController.$inject = ['ShoppingListService', 'items'];
-function CategoriesController(ShoppingListService, items) {
+CategoriesController.$inject = ['MenuService', 'items'];
+function CategoriesController(MenuService, items) {
   var mainlist = this;
   mainlist.items = items;
 }
