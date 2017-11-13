@@ -23,10 +23,10 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
   .state('categories', {
     url: '/categories',
     templateUrl: 'src/restaurant/templates/categories.template.html',
-    controller: 'CategoriesController as catCtrl',
+    controller: 'CategoriesController as vm',
     resolve: {
-      items: ['MenuService', function (MenuService) {
-        return MenuService.getItems();
+      categories: ['MenuService', function (MenuService) { //sooo this is where you get 'items'
+        return MenuService.getAllCategories();
       }]
     }
   })

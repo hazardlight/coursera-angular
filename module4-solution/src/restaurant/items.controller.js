@@ -2,13 +2,13 @@
 'use strict';
 
 angular.module('Restaurant')
-.controller('ItemslController', ItemsController);
+.controller('ItemsController', ItemsController);
 
 
-ItemsController.$inject = ['$stateParams', 'items'];
-function ItemsController($stateParams, items) {
+ItemsController.$inject = ['$stateParams', 'categories'];
+function ItemsController($stateParams, categories) {
   var itemDetail = this;
-  var item = items[$stateParams.itemId];
+  var item = categories[$stateParams.itemId];
   itemDetail.name = item.name;
   itemDetail.quantity = item.quantity;
   itemDetail.description = item.description;
