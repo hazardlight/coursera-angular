@@ -125,7 +125,7 @@ function MenuSearchService ( $http ) {
         url: ( "https://davids-restaurant.herokuapp.com/menu_items.json" )
       }).then (function (result) {
 
-        var rawJSON = result.data.menu_items;;
+        var rawJSON = result.data.menu_items;
         searchTerm = searchTerm.toLowerCase();
         var foundItems = [];
         var count = 0; //this can also be implemented using .push from rawJSON
