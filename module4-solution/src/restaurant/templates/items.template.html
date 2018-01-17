@@ -2,8 +2,13 @@
 <div>Item quantity: {{ itemDetail.quantity }}</div>
 <div>Item description: {{ itemDetail.description }}</div> -->
 
-<div>Item name: {{ itmCtrl.name }}</div>
-<div>Item quantity: {{ itmCtrl.quantity }}</div>
-<div>Item description: {{ itmCtrl.description }}</div>
+<div>You've Chosen: {{ vm.name }}</div>
+
+<ul>
+  <li ng-repeat="item in vm.categoryItems">
+    <!-- {{ item.quantity }} of {{ item.name }} -->
+    {{ item.name }}
+  </li>
+</ul>
 
 <!-- controller as syntax gets applied to the template files defined in routes.js.. cool..... -->
