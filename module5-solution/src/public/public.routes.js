@@ -40,6 +40,16 @@ function routeConfig ($stateProvider) {
           return MenuService.getMenuItems($stateParams.category);
         }]
       }
+    })
+    .state('public.signUp', {
+      url:'/sign-up',
+      templateUrl:'src/public/sign-up/sign-up.html',
+      controller: 'SignUpController',
+      controllerAs:'suCtrl',
+      resolve: {}
+    })
+    .state('public.myInfo', {
+
     });
 }
 })();
