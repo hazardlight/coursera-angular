@@ -49,7 +49,11 @@ function routeConfig ($stateProvider) {
       resolve: {}
     })
     .state('public.myInfo', {
-
+      url:'/my-info',
+      templateUrl:'src/public/my-info/my-info.html',
+      controller: 'myInfoController',
+      controllerAs:'miCtrl',
+      resolve: {}
     });
 }
 })();
