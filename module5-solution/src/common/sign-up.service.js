@@ -4,6 +4,7 @@
 
 //this function should also have logic to check if the fav entered by the user is on the menu
 
+//..the data does not persist after
 
 (function () {
 "use strict";
@@ -24,7 +25,7 @@ function SignUpService() {
   // service.favorite;
 
   //user obj
-  service.user = {};
+  //service.user = {};
 
   //sets the user data and places it in the user obj
   service.setUserData = function (f_name, l_name, email, tel, fav) {
@@ -33,11 +34,18 @@ function SignUpService() {
       service.lastName= l_name;
       service.email= email;
       service.telephone= tel;
-      service.favorite= fav;
+      service.favorite= fav; //all this config can prob just be applied in the user obj.
 
+      service.user = {
+        f: service.firstName,
+        l: service.lastName,
+        e: service.email,
+        t: service.telephone,
+        v: service.favorite
+      };
 
       console.log("fetching First Name: ", service.firstName);
-      console.log();
+      console.log("fetching user config obj: ", service.user);
 
       console.log("signUp complete");
   };
