@@ -7,21 +7,21 @@
   <form class="sign-up-form" name="formRegisterUser" novalidate>
       <div>
         First Name:
-        <input class="sign-up-input" type="text" name="firstName" ng-model="$ctrl.firstName" required>
+        <input class="sign-up-input" type="text" name="firstName" ng-model="suCtrl.firstName" required>
           <span ng-if="formRegisterUser.firstName.$error.required && formRegisterUser.firstName.$touched">
             This field is Required!
           </span>
       </div>
       <div>
         Last Name:
-        <input class="sign-up-input" type="text" name="lastName" ng-model="$ctrl.lastName" required>
+        <input class="sign-up-input" type="text" name="lastName" ng-model="suCtrl.lastName" required>
         <span ng-if="formRegisterUser.lastName.$error.required && formRegisterUser.lastName.$touched">
           This field is Required!
         </span>
       </div>
       <div>
         Email Address:
-        <input class="sign-up-input" type="email" name="email" ng-model="$ctrl.email" required minlength='1'>
+        <input class="sign-up-input" type="email" name="email" ng-model="suCtrl.email" required minlength='1'>
         <span ng-if="formRegisterUser.email.$error.required && formRegisterUser.email.$touched">
           This field is Required!
         </span>
@@ -31,20 +31,20 @@
       </div>
       <div>
         Telephone Number:
-        <input class="sign-up-input" type="tel" name="telephone" ng-model="$ctrl.telephone" required>
+        <input class="sign-up-input" type="tel" name="telephone" ng-model="suCtrl.telephone" required>
         <span ng-if="formRegisterUser.telephone.$error.required && formRegisterUser.telephone.$touched">
           This field is Required!
         </span>
       </div>
       <div>
         Tell us what you love to eat!:
-        <input class="sign-up-input" type="text" name="favorite" ng-model="$ctrl.favorite" required>
+        <input class="sign-up-input" type="text" name="favorite" ng-model="suCtrl.favorite" required>
         <span ng-if="formRegisterUser.favorite.$error.required && formRegisterUser.favorite.$touched">
           This field is Required!
         </span>
       </div>
       <div>
-        <button class="sign-up-input" ng-disabled="formRegisterUser.$invalid" ng-click="$ctrl.signUp()">
+        <button class="sign-up-input" ng-disabled="formRegisterUser.$invalid" ng-click="suCtrl.signUp()">
           Submit
         </button>
       </div>
