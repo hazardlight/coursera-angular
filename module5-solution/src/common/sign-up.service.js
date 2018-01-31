@@ -11,3 +11,8 @@ function SignUpService($http, ApiPath) {
 
 }
 })();
+
+
+// this should really be called the create-user service
+// this needs to instantiate an object that stores the user's info entered in the sign up page
+// needs a function for setting the info and also retreiving it

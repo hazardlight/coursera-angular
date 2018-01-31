@@ -53,7 +53,11 @@ function routeConfig ($stateProvider) {
       templateUrl:'src/public/my-info/my-info.html',
       controller: 'myInfoController',
       controllerAs:'miCtrl',
-      resolve: {}
+      resolve:{
+        menuItems: ['$stateParams','MenuService', function ($stateParams, MenuService) {
+          return MenuService.getMenuItems($stateParams.category);
+        }]
+      }
     });
 }
 })();
