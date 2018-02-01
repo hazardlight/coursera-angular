@@ -47,6 +47,12 @@
         <button class="sign-up-input" ng-disabled="formRegisterUser.$invalid" ng-click="suCtrl.signUp()">
           Submit
         </button>
+        <span ng-if="suCtrl.SignUpService.itemNotFound == true">
+          Your favorite food is not on our menu! please choose another item!
+        </span>
+        <span ng-if="suCtrl.SignUpService.userCreated == true">
+          User successfully created!
+        </span>
       </div>
   </form>
 

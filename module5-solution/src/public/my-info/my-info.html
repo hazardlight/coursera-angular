@@ -6,18 +6,27 @@
 <div class="text-center">
   blegh
 </div>
-<div>
-  First Name: {{miCtrl.firstName}}
+<div class="user-data" ng-if="miCtrl.SignUpService.userCreated == true">
+  <div>
+    First Name: {{miCtrl.firstName}}
+  </div>
+  <div>
+    Last Name: {{miCtrl.lastName}}
+  </div>
+  <div>
+    Email: {{miCtrl.email}}
+  </div>
+  <div>
+    Telephone: {{miCtrl.telephone}}
+  </div>
+  <div>
+    Favorite Meal: {{miCtrl.favorite}}
+  </div>
 </div>
-<div>
-  Last Name: {{miCtrl.lastName}}
-</div>
-<div>
-  Email: {{miCtrl.email}}
-</div>
-<div>
-  Telephone: {{miCtrl.telephone}}
-</div>
-<div>
-  Favorite Meal: {{miCtrl.favorite}}
+
+<div class="sign-up-link" ng-if="miCtrl.SignUpService.userCreated == false">
+  You have not registered. Please click to
+  <a ui-sref="public.signUp">
+    Sign up!
+  </a>
 </div>

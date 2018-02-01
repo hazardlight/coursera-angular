@@ -18,7 +18,7 @@ function SignUpController(/*menuItems,*/ SignUpService) {
   //
   // //user data input from HTML
   $ctrl.firstName;
-  console.log($ctrl.firstName);
+  // console.log($ctrl.firstName);
   $ctrl.lastName;
   $ctrl.email;
   $ctrl.telephone;

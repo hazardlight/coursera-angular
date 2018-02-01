@@ -13,13 +13,15 @@ function MyInfoController(SignUpService) {
 
   $ctrl.SignUpService = SignUpService;
 
-  $ctrl.user = $ctrl.SignUpService.getUserData();
+  if($ctrl.SignUpService.userCreated == true) //should this logic even be in the ctrl???
+  {
+    $ctrl.user = $ctrl.SignUpService.getUserData();
 
-  $ctrl.firstName = $ctrl.user.f;
-  $ctrl.lastName = $ctrl.user.l;
-  $ctrl.email = $ctrl.user.e;
-  $ctrl.telephone = $ctrl.user.t;
-  $ctrl.favorite = $ctrl.user.v;
+    $ctrl.firstName = $ctrl.user.f;
+    $ctrl.lastName = $ctrl.user.l;
+    $ctrl.email = $ctrl.user.e;
+    $ctrl.telephone = $ctrl.user.t;
+    $ctrl.favorite = $ctrl.user.v;
+  }
 }
-
 })();
